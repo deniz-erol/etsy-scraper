@@ -5,7 +5,7 @@ ProductList = []  # List to store name of the product
 PriceList = []    # List to store price of the product
 Links = []        # List to store product image links
 
-#Go to webpage and scrape data
+#Goes to Etsy product page and scrape data
 print('Give me a Etsy product link')
 URL = input()
 
@@ -22,9 +22,9 @@ image = str(pimage["data-src-zoom-image"])
 import pymysql.cursors
 
 connection = pymysql.connect(host='localhost',
-                             user='deniz',
-                             password='12151621',
-                             database='etsy',
+                             user='UID',
+                             password='PW',
+                             database='DB-name',
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)
 # Insert into MySQL table
@@ -33,9 +33,7 @@ with connection:
         # Create a new record
         sql = "INSERT INTO `scrape_table` (`name`, `price`, `image`) VALUES (%s, %s, %s)"
         cursor.execute(sql, (name, price, image))
-
-    # connection is not autocommit by default. So you must commit to save
-    # your changes.
+        
     connection.commit()
     print('Data insert complete!')
 
